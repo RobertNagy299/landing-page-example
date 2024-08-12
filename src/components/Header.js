@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {Fragment, useEffect, useRef} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -7,7 +7,7 @@ import {
   faMedium,
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
-import { Box, HStack } from "@chakra-ui/react";
+import {Box, Flex, HStack, Spacer} from "@chakra-ui/react";
 
 const socials = [
   {
@@ -33,8 +33,14 @@ const socials = [
 ];
 
 const Header = () => {
-  const handleClick = (anchor) => () => {
-    const id = `${anchor}-section`;
+  const handleClick = (anchor)  => {
+
+    const target = anchor.target.toString()
+    const splitTarget = target.split('#')
+    //alert(splitTarget[1]);
+    const value = splitTarget[1]
+    const id = `${value}-section`;
+    //alert(id)
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -46,6 +52,9 @@ const Header = () => {
 
   return (
     <Box
+        zIndex={10}
+      flexWrap="wrap"
+      flex={1}
       position="fixed"
       top={0}
       left={0}
@@ -56,23 +65,49 @@ const Header = () => {
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
     >
-      <Box color="white" maxWidth="1280px" margin="0 auto">
+      <Flex color="white" maxWidth="1280px" margin="0 auto"
+        flexWrap="wrap"
+      >
         <HStack
           px={16}
           py={4}
           justifyContent="space-between"
           alignItems="center"
+          flex={1}
+          flexWrap={"wrap"}
+          maxWidth={"100vw"}
         >
           <nav>
-            {/* Add social media links based on the `socials` data */}
+
+            <HStack gap={{base: 4, lg: 4, xl: 4}}>
+              {
+                socials.map(data => {
+                  return (
+                      <Fragment key={data.url}>
+                        <a href={data.url}>
+                          <FontAwesomeIcon
+                            icon={data.icon}
+                            size="2x"
+                          />
+                        </a>
+                      </Fragment>
+
+                )
+                })
+                }
+
+
+                </HStack>
           </nav>
+          <Spacer flex={1}/>
           <nav>
             <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
+              <a href="/#contactme" onClick={handleClick}>Contact Me</a>
+              <a href="/#projects" onClick={handleClick} >Projects</a>
             </HStack>
           </nav>
         </HStack>
-      </Box>
+      </Flex>
     </Box>
   );
 };

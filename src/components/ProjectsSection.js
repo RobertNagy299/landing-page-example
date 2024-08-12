@@ -1,6 +1,6 @@
 import React from "react";
 import FullScreenSection from "./FullScreenSection";
-import { Box, Heading } from "@chakra-ui/react";
+import {Box, Grid, Heading, SimpleGrid} from "@chakra-ui/react";
 import Card from "./Card";
 
 const projects = [
@@ -44,7 +44,7 @@ const ProjectsSection = () => {
       </Heading>
       <Box
         display="grid"
-        gridTemplateColumns="repeat(2,minmax(0,1fr))"
+        gridTemplateColumns={{ base:'repeat(1, 1fr)', md:'repeat(2,minmax(0,1fr))',}}
         gridGap={8}
       >
         {projects.map((project) => (
