@@ -1,9 +1,9 @@
 import {
     Heading,
-    HStack,
+
     Image,
     Text,
-    VStack,
+
     Card as ChakraCard,
     CardFooter,
     CardHeader,

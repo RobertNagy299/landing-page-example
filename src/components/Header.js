@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useRef} from "react";
+import React, {Fragment, useEffect, useRef, useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -8,6 +8,7 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import {Box, Flex, HStack, Spacer} from "@chakra-ui/react";
+
 
 const socials = [
   {
@@ -42,16 +43,50 @@ const Header = () => {
     const id = `${value}-section`;
     //alert(id)
     const element = document.getElementById(id);
+
+    const yOffset = 0;
+    const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+     window.scrollTo({top: y, behavior: "smooth"});
     }
   };
 
+  const [lastScrollTop, setlastScrollTop] = useState(0);
+  const navbarBoxRef = useRef(null)
+
+
+
+  useEffect( () => {
+
+    const boxref = navbarBoxRef.current;
+
+    const handleScroll = () => {
+      let st = window.scrollY || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+
+      if (st > lastScrollTop) {
+        // downscroll code
+        //console.log("scrolling down")
+        boxref.style.transform = "translateY(-200px)"
+
+      } else if (st < lastScrollTop) {
+        // upscroll code
+        boxref.style.transform= "translateY(0px)"
+        //console.log('scrolling up')
+      } // else was horizontal scroll
+      let newLastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+      setlastScrollTop(newLastScrollTop)
+    }
+    window.addEventListener('scroll', handleScroll)
+
+    return () => (
+        window.removeEventListener('scroll', handleScroll)
+    )
+  }, [lastScrollTop])
+
   return (
     <Box
+        ref={navbarBoxRef}
         zIndex={10}
       flexWrap="wrap"
       flex={1}
@@ -59,7 +94,6 @@ const Header = () => {
       top={0}
       left={0}
       right={0}
-      translateY={0}
       transitionProperty="transform"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
@@ -74,7 +108,7 @@ const Header = () => {
           justifyContent="space-between"
           alignItems="center"
           flex={1}
-          flexWrap={"wrap"}
+          flexWrap="wrap"
           maxWidth={"100vw"}
         >
           <nav>

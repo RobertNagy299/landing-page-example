@@ -1,6 +1,6 @@
 import {
   AlertDialog,
-  AlertDialogBody,
+  AlertDialogBody, AlertDialogCloseButton,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogOverlay,
@@ -19,6 +19,7 @@ function Alert() {
   return (
     <AlertDialog
       isOpen={isOpen}
+      motionPreset={'slideInBottom'}
       leastDestructiveRef={cancelRef}
       onClose={onClose}
     >
@@ -26,6 +27,7 @@ function Alert() {
         <AlertDialogContent py={4} backgroundColor={isSuccess ? '#81C784' : '#FF8A65'}>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
             {isSuccess ? 'All good!' : 'Oops!'}
+            <AlertDialogCloseButton />
           </AlertDialogHeader>
           <AlertDialogBody>{message}</AlertDialogBody>
         </AlertDialogContent>
