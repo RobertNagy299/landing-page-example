@@ -1,3 +1,13 @@
+# Video demonstration
+
+[![Watch the video](https://img.youtube.com/vi/R3w7qaxh4yY/maxresdefault.jpg)](https://youtu.be/R3w7qaxh4yY?si=5afqFA8vQ8gR7X89)
+
+# About the project
+
+The "Featured projects" are not real, they are merely fictional placeholders. The contact form does not actually send data to any server, this is a purely front-end project. Any messages submitted there will not be received by me, or anyone else. The skeleton for the page (The providers, the Alert and FullScreenSection components, and the custom hook) were given to us in an online course at Coursera. What I had to do was implement the design and business logic of each component you can see on the screen, and I also modified the given components a tiny bit.
+
+The star of the show is without a doubt the ContactMeSection component, where the basic layout was given, but I had to analyze and understand the structure of Formik, Yup and Chakra UI components and learn how to use them to create a responsive form with robust client-side validation and immediate feed-back.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
